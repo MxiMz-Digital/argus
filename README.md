@@ -28,6 +28,8 @@ Most linters enforce language syntax. Argus enforces **architectural discipline*
 
 They are complementary. Argus covers what generic linters cannot.
 
+Argus is also different from AI-powered code review tools. It is deterministic and rule-based — same input, same output, every time, with no API key and no model required. An AI reviewer catches logic errors and design judgment calls; Argus catches specific architectural violations at commit speed. They solve different problems and work well together.
+
 ---
 
 ## What it looks like
