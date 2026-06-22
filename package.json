@@ -7,11 +7,11 @@
     "monorepo", "supabase", "static-analysis", "pre-commit", "owasp", "core-web-vitals",
     "code-health", "design-tokens", "typescript"
   ],
-  "homepage": "https://github.com/MXiMz-Digital/argus#readme",
-  "bugs": { "url": "https://github.com/MXiMz-Digital/argus/issues" },
+  "homepage": "https://github.com/MxiMz-Digital/argus#readme",
+  "bugs": { "url": "https://github.com/MxiMz-Digital/argus/issues" },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MXiMz-Digital/argus.git"
+    "url": "git+https://github.com/MxiMz-Digital/argus.git"
   },
   "license": "MIT",
   "author": "MXiMz Digital LLP <hello@mximz.com> (https://mximz.com)",
