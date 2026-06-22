@@ -7,7 +7,7 @@ on:
 
 permissions:
   contents: read
-  id-token: write   # Required for npm provenance via Sigstore
+  id-token: write   # Required for npm Trusted Publishing (OIDC) + Sigstore provenance
 
 jobs:
   release:
@@ -28,9 +28,9 @@ jobs:
         run: node --test test/checks/*.test.js
 
       - name: Publish with provenance
-        # --provenance signs the package with Sigstore and attaches an
-        # in-toto attestation (SLSA Build L2). Consumers can verify the
-        # package was built from this exact commit on GitHub Actions.
+        # Trusted Publishing: npm verifies the OIDC token from GitHub Actions directly.
+        # No NPM_TOKEN secret required after npm Trusted Publishing is configured on npmjs.com.
+        # --provenance attaches a Sigstore attestation (SLSA Build L2).
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
