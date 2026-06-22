@@ -31,8 +31,5 @@ jobs:
 
       - name: Publish with provenance
         # Trusted Publishing: npm verifies the OIDC token from GitHub Actions directly.
-        # No NPM_TOKEN secret required after npm Trusted Publishing is configured on npmjs.com.
         # --provenance attaches a Sigstore attestation (SLSA Build L2).
         run: npm publish --provenance --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
