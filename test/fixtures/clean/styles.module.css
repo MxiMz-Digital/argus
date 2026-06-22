@@ -1,0 +1,17 @@
+/* Fixture: clean CSS — should produce zero violations */
+.title {
+  color: var(--color-heading);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+}
+
+.card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.accent {
+  color: var(--section-accent);
+  border-top: 3px solid var(--section-accent);
+}

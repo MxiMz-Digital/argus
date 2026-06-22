@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Argus — SSSEP code health auditor">
+
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F2233"/>
+      <stop offset="100%" stop-color="#060D14"/>
+    </radialGradient>
+    <radialGradient id="eyeGlow" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#15B39A" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#15B39A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <circle cx="100" cy="100" r="100" fill="url(#bgGrad)"/>
+  <circle cx="100" cy="100" r="98" fill="none" stroke="#1A9E8A" stroke-width="1.2" opacity="0.35"/>
+
+  <!-- Teal glow behind eye -->
+  <circle cx="100" cy="100" r="70" fill="url(#eyeGlow)"/>
+
+  <!-- Feather barbs — 24 lines at 15° intervals, r=60 to r=87 from centre -->
+  <g stroke="#1A9E8A" stroke-width="1.4" stroke-linecap="round" opacity="0.6">
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(0   100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(15  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(30  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(45  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(60  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(75  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(90  100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(105 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(120 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(135 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(150 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(165 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(180 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(195 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(210 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(225 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(240 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(255 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(270 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(285 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(300 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(315 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(330 100 100)"/>
+    <line x1="100" y1="40" x2="100" y2="13" transform="rotate(345 100 100)"/>
+  </g>
+
+  <!-- Shorter inner barbs — 24 lines offset by 7.5°, r=57 to r=66 (texture layer) -->
+  <g stroke="#14877E" stroke-width="0.8" stroke-linecap="round" opacity="0.4">
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(7.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(22.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(37.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(52.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(67.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(82.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(97.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(112.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(127.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(142.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(157.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(172.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(187.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(202.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(217.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(232.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(247.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(262.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(277.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(292.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(307.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(322.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(337.5 100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(352.5 100 100)"/>
+  </g>
+
+  <!-- Eye rings — authentic peacock ocellus palette, outside → inside -->
+  <!-- Ring 1: deep forest green -->
+  <circle cx="100" cy="100" r="57" fill="#0D5C44"/>
+  <!-- Ring 2: mid teal-green -->
+  <circle cx="100" cy="100" r="46" fill="#0F8870"/>
+  <!-- Ring 3: peacock blue (the iconic iridescent teal) -->
+  <circle cx="100" cy="100" r="35" fill="#0B7A9A"/>
+  <!-- Ring 4: indigo-blue -->
+  <circle cx="100" cy="100" r="24" fill="#1148A8"/>
+  <!-- Gold ring -->
+  <circle cx="100" cy="100" r="15" fill="#C29A1A"/>
+  <!-- Dark centre -->
+  <circle cx="100" cy="100" r="8"  fill="#060D14"/>
+
+  <!-- Iris highlight — gives it life -->
+  <ellipse cx="103" cy="97" rx="2.8" ry="2.2" fill="rgba(255,255,255,0.78)"/>
+
+</svg>

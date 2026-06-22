@@ -1,0 +1,11 @@
+/* Fixture: triggers CH1:hardcode-colour and CH1:hardcode-font-size */
+.title {
+  color: #1a1a2e;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+}

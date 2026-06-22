@@ -1,0 +1,36 @@
+{
+  "name": "@mximz/argus",
+  "version": "1.0.0",
+  "description": "Zero-dependency SSSEP code health auditor for Next.js monorepos. Security · Speed · SEO · Efficiency · Performance · Code Health.",
+  "keywords": [
+    "next.js", "linter", "sssep", "code-quality", "security", "seo", "performance",
+    "monorepo", "supabase", "static-analysis", "pre-commit", "owasp", "core-web-vitals",
+    "code-health", "design-tokens", "typescript"
+  ],
+  "homepage": "https://github.com/MXiMz-Digital/argus#readme",
+  "bugs": { "url": "https://github.com/MXiMz-Digital/argus/issues" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MXiMz-Digital/argus.git"
+  },
+  "license": "MIT",
+  "author": "MXiMz Digital LLP <hello@mximz.com> (https://mximz.com)",
+  "main": "src/index.js",
+  "bin": { "argus": "bin/argus.js" },
+  "files": [
+    "bin/",
+    "src/",
+    "argus.config.example.js",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/checks/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage test/checks/*.test.js",
+    "lint": "node bin/argus.js",
+    "lint:summary": "node bin/argus.js --summary",
+    "prepublishOnly": "npm test"
+  }
+}
