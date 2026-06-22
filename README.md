@@ -30,6 +30,45 @@ They are complementary. Argus covers what generic linters cannot.
 
 ---
 
+## What it looks like
+
+Run `npx @mximz/argus --summary` for a dashboard view:
+
+```
+════════════════════════════════════════════════════════════════════════════
+  SUMMARY  ·  159 files scanned  ·  0.13s
+────────────────────────────────────────────────────────────────────────────
+  🔴  Security        ░░░░░░░░░░░░░░░░░░░░ 23 warnings
+  🟡  Speed           ✓ clean
+  🟠  SEO             ✓ clean
+  🔵  Efficiency      ✓ clean
+  🟣  Performance     ░░░░░░░ 7 warnings
+  🟢  Code Health     ✓ clean
+────────────────────────────────────────────────────────────────────────────
+  Warnings do not block commits — but address them before they accumulate.
+════════════════════════════════════════════════════════════════════════════
+```
+
+Run `npx @mximz/argus` for the full report with file-level detail:
+
+```
+🔴  SECURITY  (1 warning shown of 23)
+────────────────────────────────────────────────────────────────────────────
+  ⚠️  WARN  [S5:unpinned-dependency]
+  package.json:17
+  "stylelint": "^17.13.0" — ^ ranges allow automatic updates that may
+  introduce supply-chain compromises; consider pinning
+  · OWASP A03:2025 Software Supply Chain Failures
+
+🟣  PERFORMANCE  (1 error shown of 7)
+────────────────────────────────────────────────────────────────────────────
+  🚨  ERROR  [PF1:hero-missing-priority]
+  sites/nri-web/app/(public)/associations/page.tsx:14
+  First <Image> in file is missing priority — LCP threshold is 2.0s in 2026
+```
+
+---
+
 ## Quick start
 
 ```bash
