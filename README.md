@@ -63,7 +63,7 @@ Run `npx @mximz/argus` for the full report with file-level detail:
 🟣  PERFORMANCE  (1 error shown of 7)
 ────────────────────────────────────────────────────────────────────────────
   🚨  ERROR  [PF1:hero-missing-priority]
-  sites/nri-web/app/(public)/associations/page.tsx:14
+  sites/your-app/app/(public)/page.tsx:14
   First <Image> in file is missing priority — LCP threshold is 2.0s in 2026
 ```
 
