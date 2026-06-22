@@ -7,15 +7,19 @@ on:
     # Weekly — every Monday at 06:00 UTC
     - cron: '0 6 * * 1'
 
-permissions:
-  security-events: write
-  id-token:        write
-  contents:        read
+# Top-level read-only — satisfies Scorecard's Token-Permissions check
+permissions: read-all
 
 jobs:
   scorecard:
     name: OpenSSF Scorecard analysis
     runs-on: ubuntu-latest
+
+    # Write permissions declared at job level only, as required
+    permissions:
+      security-events: write
+      id-token:        write
+      contents:        read
 
     steps:
       - name: Checkout
