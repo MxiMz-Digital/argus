@@ -219,7 +219,7 @@ See [SECURITY.md](SECURITY.md) for the vulnerability disclosure policy.
 ## Credits
 
 Conceived and directed by **Rani Wilfred**, MXiMz Digital LLP.
-Built by **Claude Code** (Anthropic) — `claude-sonnet-4-6`.
+Lead technology: **Claude Code** (Anthropic) — `claude-sonnet-4-6`.
 
 ## License
 
