@@ -1,6 +1,6 @@
 {
   "name": "@mximz/argus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Zero-dependency SSSEP code health auditor for Next.js monorepos. Security · Speed · SEO · Efficiency · Performance · Code Health.",
   "keywords": [
     "next.js", "linter", "sssep", "code-quality", "security", "seo", "performance",
@@ -21,6 +21,7 @@
     "bin/",
     "src/",
     "argus.config.example.js",
+    "logo.svg",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"

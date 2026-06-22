@@ -2,24 +2,41 @@
 
   <defs>
     <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#0F2233"/>
-      <stop offset="100%" stop-color="#060D14"/>
+      <stop offset="0%" stop-color="#025E8A"/>
+      <stop offset="100%" stop-color="#013A58"/>
     </radialGradient>
-    <radialGradient id="eyeGlow" cx="50%" cy="45%" r="60%">
-      <stop offset="0%" stop-color="#15B39A" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#15B39A" stop-opacity="0"/>
+    <radialGradient id="eyeGlow" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#00FFD4" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#00C8E8" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00B4D8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ring1Grad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#12D68A"/>
+      <stop offset="100%" stop-color="#0A9E60"/>
+    </radialGradient>
+    <radialGradient id="ring2Grad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#00D4C8"/>
+      <stop offset="100%" stop-color="#00A89E"/>
+    </radialGradient>
+    <radialGradient id="ring3Grad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#00AADD"/>
+      <stop offset="100%" stop-color="#0077BB"/>
+    </radialGradient>
+    <radialGradient id="ring4Grad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#2266DD"/>
+      <stop offset="100%" stop-color="#0A44BB"/>
     </radialGradient>
   </defs>
 
-  <!-- Background -->
+  <!-- Minimal dark background — deep teal-navy, not black -->
   <circle cx="100" cy="100" r="100" fill="url(#bgGrad)"/>
-  <circle cx="100" cy="100" r="98" fill="none" stroke="#1A9E8A" stroke-width="1.2" opacity="0.35"/>
+  <circle cx="100" cy="100" r="98" fill="none" stroke="#00D4B0" stroke-width="1.5" opacity="0.5"/>
 
-  <!-- Teal glow behind eye -->
-  <circle cx="100" cy="100" r="70" fill="url(#eyeGlow)"/>
+  <!-- Jewel glow — teal-green radiance -->
+  <circle cx="100" cy="100" r="75" fill="url(#eyeGlow)"/>
 
-  <!-- Feather barbs — 24 lines at 15° intervals, r=60 to r=87 from centre -->
-  <g stroke="#1A9E8A" stroke-width="1.4" stroke-linecap="round" opacity="0.6">
+  <!-- Feather barbs — vivid teal-cyan, 24 lines at 15° intervals -->
+  <g stroke="#00D4B0" stroke-width="1.6" stroke-linecap="round" opacity="0.75">
     <line x1="100" y1="40" x2="100" y2="13" transform="rotate(0   100 100)"/>
     <line x1="100" y1="40" x2="100" y2="13" transform="rotate(15  100 100)"/>
     <line x1="100" y1="40" x2="100" y2="13" transform="rotate(30  100 100)"/>
@@ -46,15 +63,15 @@
     <line x1="100" y1="40" x2="100" y2="13" transform="rotate(345 100 100)"/>
   </g>
 
-  <!-- Shorter inner barbs — 24 lines offset by 7.5°, r=57 to r=66 (texture layer) -->
-  <g stroke="#14877E" stroke-width="0.8" stroke-linecap="round" opacity="0.4">
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(7.5  100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(22.5 100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(37.5 100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(52.5 100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(67.5 100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(82.5 100 100)"/>
-    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(97.5 100 100)"/>
+  <!-- Inner texture barbs — bright cyan, offset 7.5° -->
+  <g stroke="#00EEDD" stroke-width="0.9" stroke-linecap="round" opacity="0.45">
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(7.5   100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(22.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(37.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(52.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(67.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(82.5  100 100)"/>
+    <line x1="100" y1="43" x2="100" y2="34" transform="rotate(97.5  100 100)"/>
     <line x1="100" y1="43" x2="100" y2="34" transform="rotate(112.5 100 100)"/>
     <line x1="100" y1="43" x2="100" y2="34" transform="rotate(127.5 100 100)"/>
     <line x1="100" y1="43" x2="100" y2="34" transform="rotate(142.5 100 100)"/>
@@ -74,21 +91,23 @@
     <line x1="100" y1="43" x2="100" y2="34" transform="rotate(352.5 100 100)"/>
   </g>
 
-  <!-- Eye rings — authentic peacock ocellus palette, outside → inside -->
-  <!-- Ring 1: deep forest green -->
-  <circle cx="100" cy="100" r="57" fill="#0D5C44"/>
-  <!-- Ring 2: mid teal-green -->
-  <circle cx="100" cy="100" r="46" fill="#0F8870"/>
-  <!-- Ring 3: peacock blue (the iconic iridescent teal) -->
-  <circle cx="100" cy="100" r="35" fill="#0B7A9A"/>
-  <!-- Ring 4: indigo-blue -->
-  <circle cx="100" cy="100" r="24" fill="#1148A8"/>
+  <!-- Eye rings — vivid jewel palette, outside → inside -->
+  <!-- Ring 1: brilliant emerald green -->
+  <circle cx="100" cy="100" r="57" fill="url(#ring1Grad)"/>
+  <!-- Ring 2: vivid teal -->
+  <circle cx="100" cy="100" r="46" fill="url(#ring2Grad)"/>
+  <!-- Ring 3: vivid peacock blue -->
+  <circle cx="100" cy="100" r="35" fill="url(#ring3Grad)"/>
+  <!-- Ring 4: sapphire blue -->
+  <circle cx="100" cy="100" r="24" fill="url(#ring4Grad)"/>
   <!-- Gold ring -->
-  <circle cx="100" cy="100" r="15" fill="#C29A1A"/>
-  <!-- Dark centre -->
-  <circle cx="100" cy="100" r="8"  fill="#060D14"/>
+  <circle cx="100" cy="100" r="15" fill="#F5C518"/>
+  <!-- Centre — deep ocean teal, no black -->
+  <circle cx="100" cy="100" r="8"  fill="#013A58"/>
 
-  <!-- Iris highlight — gives it life -->
-  <ellipse cx="103" cy="97" rx="2.8" ry="2.2" fill="rgba(255,255,255,0.78)"/>
+  <!-- Iris highlight -->
+  <ellipse cx="103" cy="97" rx="2.8" ry="2.2" fill="rgba(255,255,255,0.85)"/>
+  <!-- Secondary soft highlight -->
+  <ellipse cx="97" cy="103" rx="1.2" ry="1" fill="rgba(255,255,255,0.25)"/>
 
 </svg>

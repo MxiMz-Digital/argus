@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="logo.svg" alt="Argus logo — peacock eye" width="90" height="90">
+  <img src="https://raw.githubusercontent.com/MxiMz-Digital/argus/main/logo.svg" alt="Argus logo — peacock eye" width="90" height="90">
 </p>
 
 # @mximz/argus
