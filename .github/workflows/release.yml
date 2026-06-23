@@ -30,6 +30,8 @@ jobs:
         run: node --test test/checks/*.test.js
 
       - name: Publish with provenance
-        # Trusted Publishing: npm verifies the OIDC token from GitHub Actions directly.
+        # NODE_AUTH_TOKEN is read by the .npmrc written by setup-node (registry-url).
         # --provenance attaches a Sigstore attestation (SLSA Build L2).
         run: npm publish --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
