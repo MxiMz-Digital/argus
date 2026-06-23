@@ -12,6 +12,18 @@
 
 Argus enforces six dimensions of architectural discipline — **Security · Speed · SEO · Efficiency · Performance · Code Health** — flags violations with actionable fix suggestions, detects systemic patterns, and tracks whether your architecture is improving or degrading over time.
 
+---
+
+**For anyone landing here who is not a developer:**
+
+Every software product is built to a set of rules — security standards, design consistency, search engine requirements, performance benchmarks. In practice, these rules break quietly. A developer working under pressure uses a hardcoded value instead of a shared design token. Another skips a required metadata tag. A third leaves a debug statement that ships to live users. Nobody notices until the site is slow, ranks poorly on Google, or fails a security review.
+
+Argus is an automated enforcer. It reads every file in the codebase in under three seconds, flags every violation, and tells the developer exactly what to fix. It also detects when a problem has spread across many files — systemic drift, not an isolated mistake — and tracks whether the codebase is getting healthier or worse over time.
+
+It is built for developers. What it protects is the product.
+
+---
+
 Zero runtime dependencies. Under 3 seconds. At every commit.
 
 Named after Argus Panoptes — the hundred-eyed giant of Greek mythology who never slept.
