@@ -9,6 +9,7 @@ const { checkSEO }                       = require('./checks/seo')
 const { checkEfficiency }                = require('./checks/efficiency')
 const { checkPerformance }               = require('./checks/performance')
 const { checkCodeHealth, checkCodeHealthDeep } = require('./checks/code-health')
+const { detectPatterns }                 = require('./patterns')
 
 // ─── Staged-file helpers ──────────────────────────────────────────────────────
 
@@ -34,7 +35,7 @@ function getAffectedSites(stagedFiles, sites) {
 // Handles: suppression · rule on/off/warn · prototype pattern downgrade
 
 function createFlagger(violations, config) {
-  return function flag(dimension, rule, filePath, lineNumber, detail) {
+  return function flag(dimension, rule, filePath, lineNumber, detail, suggestion) {
     if (isIgnored(filePath, lineNumber)) return
 
     const ruleSetting = config.rules[rule]
@@ -48,14 +49,16 @@ function createFlagger(violations, config) {
       severity = 'warn'
     }
 
-    violations.push({
+    const violation = {
       dimension,
       rule,
       file:     path.relative(config._root, filePath),
       line:     lineNumber,
       detail,
       severity,
-    })
+    }
+    if (suggestion) violation.suggestion = suggestion
+    violations.push(violation)
   }
 }
 
@@ -90,6 +93,7 @@ function run(config, options = {}) {
     violations,
     errors,
     warnings,
+    patterns:   detectPatterns(violations),
     meta: {
       filesScanned: getFilesScanned(),
       sites:        sites.map(s => s.name),

@@ -74,23 +74,28 @@ function _checkHardcodedCSSValues(sites, pkgDir, flag) {
 
       if (DIRECT_COLOUR_PROPS.has(prop) && COLOUR_VALUE_RE.test(value)) {
         flag('Code Health', 'CH1:hardcode-colour', file, i + 1,
-          `Hardcoded colour on '${prop}' — replace with var(--token)  ·  ${t.slice(0, 68)}`)
+          `Hardcoded colour on '${prop}' — replace with var(--token)  ·  ${t.slice(0, 68)}`,
+          'Replace with var(--your-colour-token) — define the token in your tokens.css if it does not exist yet')
       }
       if (SHORTHAND_COLOUR_PROPS.has(prop) && COLOUR_VALUE_RE.test(value)) {
         flag('Code Health', 'CH1:hardcode-colour-shorthand', file, i + 1,
-          `Hardcoded colour in '${prop}' shorthand — extract to var(--token)  ·  ${t.slice(0, 60)}`)
+          `Hardcoded colour in '${prop}' shorthand — extract to var(--token)  ·  ${t.slice(0, 60)}`,
+          'Extract the colour value to var(--your-colour-token) within this shorthand')
       }
       if (prop === 'font-size' && FONT_SIZE_PX_RE.test(line) && !/\b0px\b/.test(value)) {
         flag('Code Health', 'CH1:hardcode-font-size', file, i + 1,
-          `Hardcoded font-size in px — replace with var(--font-size-*)  ·  ${t.slice(0, 68)}`)
+          `Hardcoded font-size in px — replace with var(--font-size-*)  ·  ${t.slice(0, 68)}`,
+          'Replace with a type-scale token from your design system, e.g. var(--font-size-base) for 14px body text')
       }
       if (prop === 'font-family' && FONT_FAMILY_STR_RE.test(value)) {
         flag('Code Health', 'CH1:hardcode-font-family', file, i + 1,
-          `Hardcoded font-family string — replace with var(--font-*)  ·  ${t.slice(0, 68)}`)
+          `Hardcoded font-family string — replace with var(--font-*)  ·  ${t.slice(0, 68)}`,
+          'Replace with a font-stack token, e.g. var(--font-family-body) or var(--font-family-heading)')
       }
       if (prop === 'font-weight' && FONT_WEIGHT_NUM_RE.test(value)) {
         flag('Code Health', 'CH1:hardcode-font-weight', file, i + 1,
-          `Hardcoded font-weight number — replace with var(--font-weight-*)  ·  ${t.slice(0, 68)}`)
+          `Hardcoded font-weight number — replace with var(--font-weight-*)  ·  ${t.slice(0, 68)}`,
+          'Replace with var(--font-weight-regular), var(--font-weight-semibold), or var(--font-weight-bold)')
       }
     })
   }
@@ -112,29 +117,34 @@ function _checkSVGPresentationAttributes(sites, flag) {
         const strokeMatch = line.match(/\bstroke=["']([^"']+)["']/)
         if (strokeMatch && !SVG_EXEMPT.test(strokeMatch[1])) {
           flag('Code Health', 'CH2:svg-stroke-hardcode', file, i + 1,
-            `SVG stroke="${strokeMatch[1]}" hardcoded — use style={{ stroke: 'var(--token)' }} so it respects the design system`)
+            `SVG stroke="${strokeMatch[1]}" hardcoded — use style={{ stroke: 'var(--token)' }} so it respects the design system`,
+            "Use style={{ stroke: 'var(--your-token)' }} instead of the stroke= presentation attribute")
         }
 
         const fillMatch = line.match(/\bfill=["']([^"']+)["']/)
         if (fillMatch && !SVG_EXEMPT.test(fillMatch[1])) {
           flag('Code Health', 'CH2:svg-fill-hardcode', file, i + 1,
-            `SVG fill="${fillMatch[1]}" hardcoded — use style={{ fill: 'var(--token)' }}  (fill="none" is the only exempt value)`)
+            `SVG fill="${fillMatch[1]}" hardcoded — use style={{ fill: 'var(--token)' }}  (fill="none" is the only exempt value)`,
+            "Use style={{ fill: 'var(--your-token)' }} instead of the fill= attribute  (fill='none' is the only exempt value)")
         }
 
         const namedFill = line.match(/\bfill=["']([\w]+)["']/)
         if (namedFill && HTML_COLOURS.test(namedFill[1])) {
           flag('Code Health', 'CH2:svg-named-colour', file, i + 1,
-            `SVG fill="${namedFill[1]}" is a named HTML colour — use style={{ fill: 'var(--token)' }}`)
+            `SVG fill="${namedFill[1]}" is a named HTML colour — use style={{ fill: 'var(--token)' }}`,
+            "Named HTML colours bypass the design system — use style={{ fill: 'var(--your-token)' }}")
         }
         const namedStroke = line.match(/\bstroke=["']([\w]+)["']/)
         if (namedStroke && HTML_COLOURS.test(namedStroke[1])) {
           flag('Code Health', 'CH2:svg-named-colour', file, i + 1,
-            `SVG stroke="${namedStroke[1]}" is a named HTML colour — use style={{ stroke: 'var(--token)' }}`)
+            `SVG stroke="${namedStroke[1]}" is a named HTML colour — use style={{ stroke: 'var(--token)' }}`,
+            "Named HTML colours bypass the design system — use style={{ stroke: 'var(--your-token)' }}")
         }
 
         if (/\bfontFamily=["']/.test(line)) {
           flag('Code Health', 'CH2:svg-fontfamily-hardcode', file, i + 1,
-            "SVG fontFamily= prop hardcoded — use style={{ fontFamily: 'var(--font-*)' }}")
+            "SVG fontFamily= prop hardcoded — use style={{ fontFamily: 'var(--font-*)' }}",
+            "Use style={{ fontFamily: 'var(--your-font-token)' }} instead of the fontFamily= prop")
         }
       })
     }
@@ -179,7 +189,8 @@ function _checkDeadCSS(sites, flag) {
                      tsxContent.includes(`styles["${cls}"]`)
         if (!used) {
           flag('Code Health', 'CH3:dead-css', cssFile, i + 1,
-            `.${cls} defined but never referenced in TSX — delete it or check for dynamic usage (use argus-ignore if intentional)`)
+            `.${cls} defined but never referenced in TSX — delete it or check for dynamic usage (use argus-ignore if intentional)`,
+            `Delete .${cls} from this file, or add // argus-ignore on the selector if it is accessed via dynamic class names`)
         }
       })
     }
@@ -202,7 +213,8 @@ function _checkNoAnyType(sites, flag) {
         if (COMMENT_RE.test(line)) return
         if (ANY_TYPE_RE.test(line)) {
           flag('Code Health', 'CH4:no-any-type', file, i + 1,
-            "'any' type defeats TypeScript — use a specific type from packages/types, or 'unknown' with a type guard")
+            "'any' type defeats TypeScript — use a specific type from packages/types, or 'unknown' with a type guard",
+            "Replace 'any' with a specific interface, or use 'unknown' with a type guard if the shape is genuinely unknown at compile time")
         }
       })
     }

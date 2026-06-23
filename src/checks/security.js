@@ -33,7 +33,8 @@ function _checkNoSelectStar(sites, pkgDir, flag) {
     readLines(file).forEach((line, i) => {
       if (RE.test(line)) {
         flag('Security', 'S1:no-select-star', file, i + 1,
-          `select('*') exposes all columns — use explicit column constants from packages/types  ·  ${OWASP.A01}`)
+          `select('*') exposes all columns — use explicit column constants from packages/types  ·  ${OWASP.A01}`,
+          "Define column constants: const COLUMNS = 'id, name, slug' as const — then use .select(COLUMNS)")
       }
     })
   }
@@ -53,7 +54,8 @@ function _checkBuildClientInGSP(sites, flag) {
         const trimmed = line.trim()
         if (/\bcreateClient\s*\(\s*\)/.test(line) && !trimmed.startsWith('//') && !trimmed.startsWith('*')) {
           flag('Security', 'S2:build-client-in-gsp', file, i + 1,
-            `createClient() alongside generateStaticParams — cookies() fails at build time; use createBuildClient()  ·  ${OWASP.A02}`)
+            `createClient() alongside generateStaticParams — cookies() fails at build time; use createBuildClient()  ·  ${OWASP.A02}`,
+            'Replace createClient() with createBuildClient() — it skips cookies() which throws at build time')
         }
       })
     }
@@ -68,7 +70,8 @@ function _checkNoUUIDInUrls(sites, flag) {
       readLines(file).forEach((line, i) => {
         if (UUID_RE.test(line)) {
           flag('Security', 'S3:no-uuid-in-urls', file, i + 1,
-            `UUID in public href — use human-readable slugs in all public URLs  ·  ${OWASP.A01}`)
+            `UUID in public href — use human-readable slugs in all public URLs  ·  ${OWASP.A01}`,
+            'Add a slug column to the DB and use it in the URL path instead of the record id')
         }
       })
     }
@@ -86,7 +89,8 @@ function _checkPublicPrefixOnSecret(sites, flag) {
         const trimmed = line.trim()
         if (SECRET_NAME_RE.test(line) && !trimmed.startsWith('//') && !trimmed.startsWith('*')) {
           flag('Security', 'S4:public-prefix-on-secret', file, i + 1,
-            `NEXT_PUBLIC_ exposes this to every browser bundle — move to a server-only env var  ·  ${OWASP.A02}`)
+            `NEXT_PUBLIC_ exposes this to every browser bundle — move to a server-only env var  ·  ${OWASP.A02}`,
+            'Remove the NEXT_PUBLIC_ prefix — server-only env vars are never included in the browser bundle')
         }
       })
     }
@@ -129,7 +133,8 @@ function _checkUnpinnedDependency(ctx, flag) {
           const lines = readLines(pkgFile)
           const lineIdx = lines.findIndex(l => l.includes(`"${name}"`) && l.includes(version))
           flag('Security', 'S5:unpinned-dependency', pkgFile, lineIdx + 1,
-            `"${name}": "${version}" — ^ ranges allow automatic updates that may introduce supply-chain compromises; consider pinning  ·  ${OWASP.A03}`)
+            `"${name}": "${version}" — ^ ranges allow automatic updates that may introduce supply-chain compromises; consider pinning  ·  ${OWASP.A03}`,
+            `Remove the ^ prefix — run: npm list ${name}  to find the exact installed version, then pin to that`)
         }
       }
     }

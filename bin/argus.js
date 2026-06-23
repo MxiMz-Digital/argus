@@ -3,9 +3,10 @@
 
 const path        = require('path')
 const fs          = require('fs')
-const { loadConfig }                  = require('../src/config')
-const { run }                         = require('../src/runner')
-const { reportHuman, reportJSON }     = require('../src/reporter')
+const { loadConfig }                          = require('../src/config')
+const { run }                                 = require('../src/runner')
+const { reportHuman, reportJSON, reportTrend } = require('../src/reporter')
+const { saveRun, loadHistory }                = require('../src/history')
 
 const startTime = Date.now()
 const args      = process.argv.slice(2)
@@ -28,6 +29,16 @@ const JSON_MODE    = args.includes('--json')
 const SUMMARY_ONLY = args.includes('--summary')
 const STAGED_MODE  = args.includes('--staged')
 const DEEP_MODE    = args.includes('--deep')
+const TREND_MODE   = args.includes('--trend')
+
+// ─── Trend view — read history without running a scan ─────────────────────────
+
+if (TREND_MODE) {
+  const root    = process.cwd()
+  const history = loadHistory(root)
+  process.stdout.write(reportTrend(history))
+  process.exit(0)
+}
 
 // ─── Run ──────────────────────────────────────────────────────────────────────
 
@@ -43,6 +54,12 @@ try {
 
 const result = run(config, { staged: STAGED_MODE, deep: DEEP_MODE })
 result.meta._startTime = startTime
+
+// Save history for human-readable runs (not JSON — CI environments must not write files)
+if (!JSON_MODE) {
+  const history  = saveRun(root, result)
+  result.history = history
+}
 
 if (JSON_MODE) {
   process.stdout.write(reportJSON(result) + '\n')
@@ -68,7 +85,7 @@ function _commandInit() {
 // ─── install-hook — write pre-commit hook into .git/hooks/ ───────────────────
 
 function _commandInstallHook() {
-  const gitDir  = path.join(process.cwd(), '.git')
+  const gitDir   = path.join(process.cwd(), '.git')
   const hooksDir = path.join(gitDir, 'hooks')
 
   if (!fs.existsSync(gitDir)) {

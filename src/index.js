@@ -18,15 +18,20 @@
  *   })
  */
 
-const { loadConfig }   = require('./config')
-const { run: _run }    = require('./runner')
-const { reportHuman, reportJSON } = require('./reporter')
+const { loadConfig }                          = require('./config')
+const { run: _run }                           = require('./runner')
+const { reportHuman, reportJSON, reportTrend } = require('./reporter')
+const { detectPatterns }                      = require('./patterns')
+const { loadHistory, saveRun, getTrend }      = require('./history')
 
 function run(options = {}) {
-  const { root, configPath, staged = false, deep = false } = options
+  const { root, configPath, staged = false, deep = false, saveHistory = false } = options
   const config = loadConfig(root, configPath)
   const result = _run(config, { staged, deep })
   result.meta._startTime = result.meta._startTime || Date.now()
+  if (saveHistory && root) {
+    result.history = saveRun(root, result)
+  }
   return result
 }
 
@@ -35,4 +40,9 @@ module.exports = {
   loadConfig,
   reportHuman,
   reportJSON,
+  reportTrend,
+  detectPatterns,
+  loadHistory,
+  saveRun,
+  getTrend,
 }

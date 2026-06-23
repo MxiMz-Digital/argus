@@ -5,6 +5,48 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) · Versioning: 
 
 ---
 
+## [1.1.0] — 2026-06-23
+
+### Added
+
+**Suggestions — every violation now tells you what to do, not just what is wrong.**
+
+Each rule carries an optional `suggestion` field — a plain-English fix specific to that violation. The terminal report renders it as a `💡` line directly below the detail. The JSON output includes `suggestion` on each violation object for CI consumers.
+
+**Pattern detection — violations become architectural intelligence.**
+
+After every scan, Argus analyses the full violation set and reports three pattern types:
+
+- **Systemic** — the same rule fires in 3+ distinct files. This is architectural drift, not an isolated mistake. Address the root cause codebase-wide.
+- **Repeated value** — the same hardcoded hex colour appears in 2+ files. Define one CSS custom property and reference it everywhere.
+- **Hotspot** — one file accumulates 4+ violations. Schedule a dedicated refactor session rather than patching line by line.
+
+Patterns appear in a `PATTERNS DETECTED` section after the violation list. Programmatic consumers receive `result.patterns` — an array of pattern objects with `type`, `detail`, and `action` fields.
+
+**History — Argus now remembers.**
+
+Each human-readable run appends a snapshot to `.argus-history.json` at the project root (max 30 entries, rolling). This powers:
+
+- **Trend arrows** in the summary table — each dimension shows ↑ worsening / ↓ improving vs the previous run, with the exact delta.
+- **`--trend` flag** — prints the last 20 runs as a table with per-run deltas and an overall trajectory summary. No scan is performed. Useful as a session-start health check.
+
+History is not written in `--json` mode (CI environments must not write files during automated scans).
+
+**`--trend` CLI flag** — new sub-command, reads `.argus-history.json` and exits without scanning.
+
+**Programmatic API additions:**
+- `argus.detectPatterns(violations)` — run pattern detection on any violation array
+- `argus.loadHistory(root)` — read the history file for a given project root
+- `argus.saveRun(root, result)` — append a run to the history file
+- `argus.getTrend(history, dimension)` — compute trend direction and delta for a dimension or overall
+- `argus.reportTrend(history)` — format the trend table as a string
+
+**Positioning update:**
+- Package description updated to: *"Zero-dependency architecture compliance enforcer for Next.js monorepos."*
+- New keyword: `architecture-compliance`
+
+---
+
 ## [1.0.0] — 2026-06-22
 
 ### Added

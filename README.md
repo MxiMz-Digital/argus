@@ -4,13 +4,15 @@
 
 # @mximz/argus
 
-**Zero-dependency SSSEP code health auditor for Next.js monorepos.**
+**Zero-dependency architecture compliance enforcer for Next.js monorepos.**
 
 [![npm](https://img.shields.io/npm/v/@mximz/argus)](https://www.npmjs.com/package/@mximz/argus)
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/MXiMz-Digital/argus/badge)](https://securityscorecards.dev/viewer/?uri=github.com/MXiMz-Digital/argus)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Argus enforces six dimensions of code quality — **Security · Speed · SEO · Efficiency · Performance · Code Health** — with zero runtime dependencies, in under 3 seconds, at every commit.
+Argus enforces six dimensions of architectural discipline — **Security · Speed · SEO · Efficiency · Performance · Code Health** — flags violations with actionable fix suggestions, detects systemic patterns, and tracks whether your architecture is improving or degrading over time.
+
+Zero runtime dependencies. Under 3 seconds. At every commit.
 
 Named after Argus Panoptes — the hundred-eyed giant of Greek mythology who never slept.
 
@@ -29,6 +31,15 @@ Most linters enforce language syntax. Argus enforces **architectural discipline*
 They are complementary. Argus covers what generic linters cannot.
 
 Argus is also different from AI-powered code review tools. It is deterministic and rule-based — same input, same output, every time, with no API key and no model required. An AI reviewer catches logic errors and design judgment calls; Argus catches specific architectural violations at commit speed. They solve different problems and work well together.
+
+### What Argus answers
+
+| Question | Feature |
+|---|---|
+| What is wrong? | 20 rules across 6 dimensions |
+| What do I do about it? | **Suggestions** — every violation carries an actionable fix |
+| Is this isolated or systemic? | **Pattern detection** — systemic drift · repeated values · hotspot files |
+| Are we improving or regressing? | **History** — trend arrows per dimension · `--trend` dashboard |
 
 ---
 
@@ -92,8 +103,9 @@ npx @mximz/argus install-hook
 ## CLI flags
 
 ```bash
-npx @mximz/argus              # full report
-npx @mximz/argus --summary    # summary table only
+npx @mximz/argus              # full report with suggestions + patterns
+npx @mximz/argus --summary    # summary table with trend arrows
+npx @mximz/argus --trend      # trend dashboard (no scan — reads history only)
 npx @mximz/argus --json       # machine-readable JSON (CI pipelines)
 npx @mximz/argus --staged     # staged files only (fast pre-commit mode)
 npx @mximz/argus --deep       # include deep checks (CH4: no-any-type)
@@ -209,12 +221,21 @@ color: #1a1a2e;
 ```js
 const argus = require('@mximz/argus')
 
-const result = argus.run({ root: process.cwd(), staged: true })
+const result = argus.run({ root: process.cwd(), staged: true, saveHistory: true })
 
 console.log(result.passed)      // boolean
-console.log(result.errors)      // blocking violations
-console.log(result.warnings)    // non-blocking
+console.log(result.errors)      // blocking violations (each has .suggestion)
+console.log(result.warnings)    // non-blocking (each has .suggestion)
+console.log(result.patterns)    // systemic · repeated-value · hotspot patterns
+console.log(result.history)     // last 30 runs (populated when saveHistory: true)
 console.log(result.meta)        // filesScanned, sites, timestamp
+
+// Trend for a specific dimension
+const t = argus.getTrend(result.history, 'Code Health')
+// { prev: 5, curr: 2, delta: -3, direction: '↓' }
+
+// Print the trend dashboard as a string
+console.log(argus.reportTrend(result.history))
 ```
 
 ---

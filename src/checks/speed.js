@@ -20,7 +20,8 @@ function _checkMissingRevalidate(sites, flag) {
       const content = readFile(file)
       if (/generateStaticParams/.test(content) && !/export\s+const\s+revalidate/.test(content)) {
         flag('Speed', 'SP1:missing-revalidate', file, 1,
-          'generateStaticParams present but no revalidate export — ISR interval is undefined; set explicitly (e.g. export const revalidate = 3600)')
+          'generateStaticParams present but no revalidate export — ISR interval is undefined; set explicitly (e.g. export const revalidate = 3600)',
+          'Add below your imports: export const revalidate = 3600  (adjust the number to match how often this data changes)')
       }
     }
   }
@@ -38,7 +39,8 @@ function _checkUseClientWithRevalidate(sites, flag) {
       const content = readFile(file)
       if (/^\s*['"]use client['"]/.test(content) && /export\s+const\s+revalidate/.test(content)) {
         flag('Speed', 'SP2:use-client-with-revalidate', file, 1,
-          "'use client' page exports revalidate — this value is ignored by Next.js on Client Components; move data fetching to a Server Component parent")
+          "'use client' page exports revalidate — this value is ignored by Next.js on Client Components; move data fetching to a Server Component parent",
+          "Remove the revalidate export — move data fetching to a Server Component parent that wraps this Client Component page")
       }
     }
   }

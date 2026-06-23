@@ -1,11 +1,11 @@
 {
   "name": "@mximz/argus",
-  "version": "1.0.1",
-  "description": "Zero-dependency SSSEP code health auditor for Next.js monorepos. Security · Speed · SEO · Efficiency · Performance · Code Health.",
+  "version": "1.1.0",
+  "description": "Zero-dependency architecture compliance enforcer for Next.js monorepos. Flags violations, suggests fixes, detects patterns, and tracks trend over time.",
   "keywords": [
-    "next.js", "linter", "sssep", "code-quality", "security", "seo", "performance",
+    "next.js", "linter", "architecture", "compliance", "code-quality", "security", "seo", "performance",
     "monorepo", "supabase", "static-analysis", "pre-commit", "owasp", "core-web-vitals",
-    "code-health", "design-tokens", "typescript"
+    "code-health", "design-tokens", "typescript", "architecture-compliance"
   ],
   "homepage": "https://github.com/MxiMz-Digital/argus#readme",
   "bugs": { "url": "https://github.com/MxiMz-Digital/argus/issues" },

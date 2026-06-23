@@ -37,7 +37,8 @@ function _checkHeroMissingPriority(sites, heroComponents, flag) {
       const block = lines.slice(firstImg, firstImg + 10).join(' ')
       if (!/\bpriority\b/.test(block)) {
         flag('Performance', 'PF1:hero-missing-priority', file, firstImg + 1,
-          'First <Image> missing priority prop — the LCP image must load eagerly; Google tightened the LCP threshold to 2.0s in 2026')
+          'First <Image> missing priority prop — the LCP image must load eagerly; Google tightened the LCP threshold to 2.0s in 2026',
+          'Add the priority prop: <Image priority src={...} alt="..." /> — tells the browser to fetch this image before other resources')
       }
     }
   }
@@ -70,7 +71,8 @@ function _checkStaticInlineStyle(sites, flag) {
         if (HAS_TOKEN.test(line)) return
         if (!HAS_QUOTED_VALUE.test(match[1])) return
         flag('Performance', 'PF2:static-inline-style', file, i + 1,
-          'Quoted literal in inline style={{}} — move to a CSS module class using a design token (inline styles defeat browser stylesheet caching)')
+          'Quoted literal in inline style={{}} — move to a CSS module class using a design token (inline styles defeat browser stylesheet caching)',
+          'Move to a CSS module class with a design token, e.g. .coverImg { object-fit: cover; }  then use className={styles.coverImg}')
       })
     }
   }
@@ -97,7 +99,8 @@ function _checkHeavyEventHandler(sites, flag) {
         const handlerBlock = lines.slice(i, i + 15).join('\n')
         if (HEAVY_OP_RE.test(handlerBlock)) {
           flag('Performance', 'PF3:heavy-event-handler', file, i + 1,
-            'Potential heavy synchronous operation inside event handler — move to useMemo/useCallback or a Web Worker to protect INP (Google threshold: 200ms)')
+            'Potential heavy synchronous operation inside event handler — move to useMemo/useCallback or a Web Worker to protect INP (Google threshold: 200ms)',
+            'Wrap the heavy operation in useMemo/useCallback, or debounce/throttle the handler to prevent blocking the main thread')
         }
       })
     }

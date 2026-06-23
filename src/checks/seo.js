@@ -34,7 +34,8 @@ function _checkMetadata(site, flag) {
       const layoutContent = fs.existsSync(layoutFile) ? readFile(layoutFile) : ''
       if (!/generateMetadata|export\s+const\s+metadata\b/.test(layoutContent)) {
         flag('SEO', 'SEO1:missing-metadata', file, 1,
-          'No generateMetadata() or metadata export — every public page needs a unique title + description for search indexing')
+          'No generateMetadata() or metadata export — every public page needs a unique title + description for search indexing',
+          "Add: export async function generateMetadata() { return { title: 'Page Title', description: 'Page description for search results' } }")
       }
     }
   }
@@ -45,7 +46,8 @@ function _checkMetadata(site, flag) {
     const content = readFile(layoutFile)
     if (!/generateMetadata|export\s+const\s+metadata\b/.test(content)) {
       flag('SEO', 'SEO1:missing-auth-metadata', layoutFile, 1,
-        '(auth) route group layout missing metadata — add robots: { index: false, follow: false } to prevent auth pages being indexed')
+        '(auth) route group layout missing metadata — add robots: { index: false, follow: false } to prevent auth pages being indexed',
+        'Add: export const metadata = { robots: { index: false, follow: false } }')
     }
   }
 }
@@ -63,13 +65,15 @@ function _checkH1(site, h1Components, flag) {
 
     if (count > 1) {
       flag('SEO', 'SEO2:multiple-h1', file, 1,
-        `${count} <h1> elements in one page — only one primary heading per page (multiple h1s confuse search engines)`)
+        `${count} <h1> elements in one page — only one primary heading per page (multiple h1s confuse search engines)`,
+        'Keep exactly one <h1> — convert the extra headings to <h2> or lower')
     }
     if (count === 0) {
       const hasH1Component = h1Components.some(c => content.includes(c))
       if (!hasH1Component) {
         flag('SEO', 'SEO2:missing-h1', file, 1,
-          `No <h1> and no recognised h1-bearing component (${h1Components.join(', ')}) — every page needs one primary heading`)
+          `No <h1> and no recognised h1-bearing component (${h1Components.join(', ')}) — every page needs one primary heading`,
+          'Add an <h1> containing the page\'s primary keyword as the first visible heading')
       }
     }
   }
@@ -88,10 +92,12 @@ function _checkImageAlt(site, flag) {
       const window = lines.slice(i, i + 10).join(' ')
       if (!/\balt=/.test(window)) {
         flag('SEO', 'SEO3:image-no-alt', file, i + 1,
-          '<Image> missing alt prop — describe what the image shows; decorative images use alt="" inside aria-hidden container')
+          '<Image> missing alt prop — describe what the image shows; decorative images use alt="" inside aria-hidden container',
+          "Add a descriptive alt prop: alt='Describe what this image shows'")
       } else if (/\balt=["'`]["'`]/.test(window) || /\balt=["'`]image["'`]/i.test(window)) {
         flag('SEO', 'SEO3:image-empty-alt', file, i + 1,
-          'alt="" or alt="image" — write a meaningful description; empty alt defeats screen readers and degrades page quality signals')
+          'alt="" or alt="image" — write a meaningful description; empty alt defeats screen readers and degrades page quality signals',
+          "Replace the empty alt with a meaningful description — purely decorative images use aria-hidden='true' on a wrapper")
       }
     })
   }
@@ -106,7 +112,8 @@ function _checkNativeImg(site, flag) {
       const trimmed = line.trim()
       if (/(?:^|[^a-zA-Z<])<img\s/.test(line) && !trimmed.startsWith('//') && !trimmed.startsWith('*')) {
         flag('SEO', 'SEO4:native-img-tag', file, i + 1,
-          '<img> tag — replace with Next.js <Image> for automatic WebP/AVIF · lazy loading · responsive srcset · layout-shift prevention')
+          '<img> tag — replace with Next.js <Image> for automatic WebP/AVIF · lazy loading · responsive srcset · layout-shift prevention',
+          "Import and use Next.js Image: import Image from 'next/image' — auto WebP/AVIF · lazy loading · prevents layout shift")
       }
     })
   }
